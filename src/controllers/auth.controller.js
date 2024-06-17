@@ -6,12 +6,13 @@ import nodemailer from "nodemailer"
 import config from "../config/config.js"
 
 export const register = async (req, res) => {
-    const { name, company, email, password,rol } = req.body
+    const { name, company, email, password,role } = req.body
+    console.log(name, company, email, password,role)
     try{
         const userFound = await userService.findOne({email})
         if (userFound) return res.status(400).json(["El email ya esta registrado"])
         const hash = await bcrypt.hash(password, 10)
-        const newUser = await userService.create({ name, company, email, password: hash, rol, verificado:false, resetToken:"" })
+        const newUser = await userService.create({ name, company, email, password: hash, role, verificado:false, resetToken:"" })
         const token = await createAccessToken({ id: newUser._id })
         res.cookie("token", token)
         res.json({
@@ -27,7 +28,9 @@ export const register = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body   
+    console.log(email)
+    console.log(password)
     const userFound = await userService.findOne({ email })
     if (!userFound) return res.status(400).json({ message: "Usuario no encontrado" })
     const isMatch = await bcrypt.compare(password, userFound.password)

@@ -13,7 +13,7 @@ app.use(cookieParser())
 
 app.use(cors({
     // en modo produccion
-    // origin: 'https://transcurrin-cl-client.vercel.app',
+    origin: 'https://transcurrin-cl-client.vercel.app',
      // en modo dev
     origin: "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -21,7 +21,7 @@ app.use(cors({
     credentials: true
 }))
 
-// app.use("/api", authRoutes)
+app.use("/api", authRoutes)
 app.use("/api", intranetRoutes)
 // app.use("/api", resetPassword)
 
