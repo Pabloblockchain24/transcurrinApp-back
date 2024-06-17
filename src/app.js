@@ -15,7 +15,7 @@ app.use(cors({
     // en modo produccion
     // origin: 'https://transcurrin-cl-client.vercel.app',
      // en modo dev
-    origin: 'http://localhost:8081',
+    origin: "*",
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization',"Cookie"],
     credentials: true
